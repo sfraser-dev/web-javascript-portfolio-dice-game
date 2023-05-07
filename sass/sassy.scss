@@ -4,7 +4,11 @@ $color_3: #232931;      // heading shadow color
 $color_4: #AEf5DD;      // button background color hover
 $font-family_1: 'Lobster', cursive;
 $font-family_2: 'Indie Flower', cursive;
+$font-family_3: 'Roboto Mono', monospace;
 
+.button-div {
+    margin-bottom: 40px;
+}
 .button {
 	background-color: $color_2;
 	border: none;
@@ -12,9 +16,10 @@ $font-family_2: 'Indie Flower', cursive;
 	padding: 8px 8px;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 1rem;
+	font-size: 1.2rem;
+	font-family: $font-family_2;
 	margin-top: 40px;
-	transition-duration: 0.4s;
+	transition-duration: 0.2s;
 	cursor: pointer;
 	&:hover {
 		background-color: $color_4;
@@ -30,6 +35,11 @@ $font-family_2: 'Indie Flower', cursive;
 	display: inline-block;
 	width: 20%;
 	height: auto;
+
+}
+.resultsDatabase{
+	font-family: $font-family_3;
+    font-size: 0.85rem;
 }
 body {
 	background-color: $color_1;

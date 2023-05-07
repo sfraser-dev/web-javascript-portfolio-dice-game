@@ -35,9 +35,13 @@ function playGame(diceImg1, diceImg2, titleElement) {
 }
 
 // Get data from local storage and show it on the page.
-function showHistorialResults() {
+function showResultsDatabase() {
+    if (window.localStorage.length > 0) {
+        let showDbBtn = document.getElementsByClassName("btnDatabase")[0];
+        showDbBtn.innerHTML = "Update results database with new values";
+    }
     // Need to delete any previously shown results (or they will just concatenate).
-    deleteHistoricalResults("historicalResults");
+    deleteHistoricalResults("resultsDatabase");
     // Local storage acts like an object which doesn't have order, need to order manually.
     let orderedArrVals = new Array(window.localStorage.length).fill(0);
     for (let i = 0; i < window.localStorage.length; i++) {
@@ -49,7 +53,7 @@ function showHistorialResults() {
     // Put ordered historical results onto page.
     for (let i = 0; i < orderedArrVals.length; i++) {
         const newParagraph = document.createElement("p");
-        newParagraph.setAttribute("class", "historicalResults");
+        newParagraph.setAttribute("class", "resultsDatabase");
         const theOutputText = 
             `Round ${i+1}, Player1: ${orderedArrVals[i]["P1"]}, Player2: ${orderedArrVals[i]["P2"]}`;
         newParagraph.innerText = theOutputText;
@@ -70,7 +74,7 @@ const diceImagePlayer1 = document.getElementsByClassName("img1")[0];
 const diceImagePlayer2 = document.getElementsByClassName("img2")[0];
 const rollBtn = document.getElementsByClassName("btnRoll")[0];
 const resetBtn = document.getElementsByClassName("btnReset")[0];
-const historyBtn = document.getElementsByClassName("btnHistory")[0];
+const historyBtn = document.getElementsByClassName("btnDatabase")[0];
 const theTitleElement = document.getElementById("title");
 const theTitleOriginalText = theTitleElement.innerHTML;
 let ROLL_COUNTER = 0;
@@ -82,7 +86,7 @@ rollBtn.addEventListener("click", function () {
 });
 
 // Show dice throw historical results 
-historyBtn.addEventListener("click", showHistorialResults);
+historyBtn.addEventListener("click", showResultsDatabase);
 
 // Reset the game by resetting the data and images.
 resetBtn.addEventListener("click", () => {
@@ -92,5 +96,5 @@ resetBtn.addEventListener("click", () => {
     diceImagePlayer2.setAttribute("src", "./images/dice6.png");
     window.localStorage.clear();
     ROLL_COUNTER = 0;
-    deleteHistoricalResults("historicalResults");
+    deleteHistoricalResults("resultsDatabase");
 });
