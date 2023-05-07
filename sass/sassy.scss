@@ -1,13 +1,11 @@
 $color_1: #393E46;
 $color_2: #4ECCA3;
+$color_3: #aef5dd;
 $font-family_1: 'Lobster', cursive;
 $font-family_2: 'Indie Flower', cursive;
-$background-color_1: #4ECCA3;
-$background-color_2: #79ebc5;
-$background-color_3: #393E46;
 
 .button {
-	background-color: $background-color_1;
+	background-color: $color_2;
 	border: none;
 	color: $color_1;
 	padding: 8px 8px;
@@ -19,7 +17,7 @@ $background-color_3: #393E46;
 	transition-duration: 0.4s;
 	cursor: pointer;
 	&:hover {
-		background-color: $background-color_2;
+		background-color: $color_3;
 		border: none;
 		color: $color_1;
 	}
@@ -36,7 +34,7 @@ $background-color_3: #393E46;
 	height: auto;
 }
 body {
-	background-color: $background-color_3;
+	background-color: $color_1;
 }
 h1 {
 	margin: 30px;
