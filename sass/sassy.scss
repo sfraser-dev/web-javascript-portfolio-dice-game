@@ -1,6 +1,7 @@
-$color_1: #393E46;
-$color_2: #4ECCA3;
-$color_3: #aef5dd;
+$color_1: #393E46;      // general background color and button text color
+$color_2: #4ECCA3;      // general text color and button background color
+$color_3: #232931;      // heading shadow color
+$color_4: #AEf5DD;      // button background color hover
 $font-family_1: 'Lobster', cursive;
 $font-family_2: 'Indie Flower', cursive;
 
@@ -9,7 +10,6 @@ $font-family_2: 'Indie Flower', cursive;
 	border: none;
 	color: $color_1;
 	padding: 8px 8px;
-	text-align: center;
 	text-decoration: none;
 	display: inline-block;
 	font-size: 1rem;
@@ -17,7 +17,7 @@ $font-family_2: 'Indie Flower', cursive;
 	transition-duration: 0.4s;
 	cursor: pointer;
 	&:hover {
-		background-color: $color_3;
+		background-color: $color_4;
 		border: none;
 		color: $color_1;
 	}
@@ -25,21 +25,20 @@ $font-family_2: 'Indie Flower', cursive;
 .container {
 	width: 70%;
 	margin: auto;
-	text-align: center;
 }
 .dice {
-	text-align: center;
 	display: inline-block;
 	width: 20%;
 	height: auto;
 }
 body {
 	background-color: $color_1;
+    text-align: center;
 }
 h1 {
 	margin: 30px;
 	font-family: $font-family_1;
-	text-shadow: 5px 0 #232931;
+	text-shadow: 5px 0 $color_3;
 	font-size: 4rem;
 	color: $color_2;
 }
