@@ -25,7 +25,7 @@ function printOutcomeOfDiceRolls(p1, p2) {
 
 const player1dice = document.getElementsByClassName("img1");
 const player2dice = document.getElementsByClassName("img2");
-const paragraphClickToRoll = document.getElementById("pRoll");
+const rollBtn = document.getElementsByClassName("btnRoll");
 
 let p1Roll = rollTheDice();
 let p2Roll = rollTheDice();

@@ -1,3 +1,29 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+.btnRoll {
+  background-color: #4ECCA3; /* Green */
+  border: none;
+  color: #393E46;
+  padding: 8px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 20px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.btnRoll:hover {
+  background-color: #79ebc5; /* Green */
+  border: none;
+  color: #393E46;
+ }
+
 .container {
   width: 70%;
   margin: auto;
