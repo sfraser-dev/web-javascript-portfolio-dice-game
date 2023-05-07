@@ -38,7 +38,7 @@ const diceImagePlayer2= document.getElementsByClassName("img2")[0];
 const rollBtn = document.getElementsByClassName("btnRoll")[0];
 const resetBtn = document.getElementsByClassName("btnReset")[0];
 
-// Passing a function with parameters to eventListener via an anonymous function to roll both dice.
+// Roll both dice by passing a function with parameters to eventListener via an anonymous function.
 rollBtn.addEventListener("click", function () { playGame(diceImagePlayer1, diceImagePlayer2); } );
 
 // Reset the game by reloading the page.
