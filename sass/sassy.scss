@@ -1,0 +1,55 @@
+$color_1: #393E46;
+$color_2: #4ECCA3;
+$font-family_1: 'Lobster', cursive;
+$font-family_2: 'Indie Flower', cursive;
+$background-color_1: #4ECCA3;
+$background-color_2: #79ebc5;
+$background-color_3: #393E46;
+
+.button {
+	background-color: $background-color_1;
+	border: none;
+	color: $color_1;
+	padding: 8px 8px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1rem;
+	margin-top: 40px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	&:hover {
+		background-color: $background-color_2;
+		border: none;
+		color: $color_1;
+	}
+}
+.container {
+	width: 70%;
+	margin: auto;
+	text-align: center;
+}
+.dice {
+	text-align: center;
+	display: inline-block;
+	width: 20%;
+	height: auto;
+}
+body {
+	background-color: $background-color_3;
+}
+h1 {
+	margin: 30px;
+	font-family: $font-family_1;
+	text-shadow: 5px 0 #232931;
+	font-size: 4rem;
+	color: $color_2;
+}
+p {
+	font-size: 1.25rem;
+	color: $color_2;
+	font-family: $font-family_2;
+}
+img {
+	width: 80%;
+}
