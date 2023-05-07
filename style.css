@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-.btnRoll {
+.button{
   background-color: #4ECCA3; /* Green */
   border: none;
   color: #393E46;
@@ -13,12 +13,12 @@
   text-decoration: none;
   display: inline-block;
   font-size: 1rem;
-  margin: 20px 2px;
+  margin-top: 40px;
   transition-duration: 0.4s;
   cursor: pointer;
 }
 
-.btnRoll:hover {
+.button:hover {
   background-color: #79ebc5; /* Green */
   border: none;
   color: #393E46;
@@ -57,11 +57,4 @@ p {
 
 img {
   width: 80%;
-}
-
-footer {
-  margin-top: 5%;
-  color: #EEEEEE;
-  text-align: center;
-  font-family: 'Indie Flower', cursive;
 }
