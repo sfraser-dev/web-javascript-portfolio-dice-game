@@ -1,6 +1,6 @@
 // A simple two player dice game. The results of each round are stored in local 
-// storage (a "database") in JSON format. The user can have the "database" results
-// printed to screen. The user can also reset the game and clear the "database".
+// storage ("database") in JSON format. The user can print the "database" to screen.
+// The user can also simultaneously reset the game and clear the "database".
 
 "use strict";
 
