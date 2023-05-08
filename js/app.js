@@ -40,7 +40,7 @@ function showResultsDatabase(statusObj) {
     // If there is already database info printed on the page, change the button's text.
     if (window.localStorage.length > 0) {
         let showDbBtn = document.getElementsByClassName("btnDatabase")[0];
-        showDbBtn.innerHTML = "🛢 Update database with any new dice rolls";
+        showDbBtn.innerHTML = "🛢 Show new dice rolls in updated database";
     }
     // Need to delete any previously shown results (or they will just concatenate).
     deleteResultsDatabaseFromScreen("resultsDatabase");
