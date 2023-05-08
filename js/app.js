@@ -1,6 +1,6 @@
 // A simple two player dice game. The results of each round are stored in local 
-// storage (a "database"). The user can have the "database" results printed to screen.
-// The user can reset the game and clear the "database".
+// storage (a "database") in JSON format. The user can have the "database" results
+// printed to screen. The user can reset the game and clear the "database".
 
 "use strict";
 
@@ -11,25 +11,16 @@ function rollTheDice() {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Determine which player wins (or if it's a draw) and update h1 element with the result.
-function printOutcomeOfDiceRolls(p1, p2, titleElement) {
-    let text = "";
-    if (p1 > p2) {
-        text = "player 1 wins";
-    }
-    else if (p2 > p1) {
-        text = "player 2 wins";
-    }
-    else {
-        text = "it's a draw";
-    }
-    titleElement.innerText = text;
+// Determine winner of dice roll round and update h1 element with the result.
+function printOutcomeOfDiceRolls(p1, p2, element) {
+    element.innerText = (p1>p2) ? "player 1 wins" : ((p2>p1) ? "player 2 wins" : "it's a draw");
 }
 
 // Play a single round of the game (roll dice for player 1 and player 2).
 function playGame(diceImg1, diceImg2, titleElement) {
     let p1Roll = rollTheDice();
     let p2Roll = rollTheDice();
+    // Update the dice images.
     diceImg1.setAttribute("src", `images/dice${p1Roll}.png`);
     diceImg2.setAttribute("src", `images/dice${p2Roll}.png`);
     // Print who wins this round in the title (h1 heading).
