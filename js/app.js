@@ -1,6 +1,6 @@
 // A simple two player dice game. The results of each round are stored in local 
 // storage (a "database") in JSON format. The user can have the "database" results
-// printed to screen. The user can reset the game and clear the "database".
+// printed to screen. The user can also reset the game and clear the "database".
 
 "use strict";
 
@@ -40,7 +40,7 @@ function showResultsDatabase(statusObj) {
     // If there is already database info printed on the page, change the button's text.
     if (window.localStorage.length > 0) {
         let showDbBtn = document.getElementsByClassName("btnDatabase")[0];
-        showDbBtn.innerHTML = "Show new dice roles added to the database";
+        showDbBtn.innerHTML = "🛢 Update databse with any new dice rolls";
     }
     // Need to delete any previously shown results (or they will just concatenate).
     deleteResultsDatabaseFromScreen("resultsDatabase");
@@ -73,8 +73,7 @@ function deleteResultsDatabaseFromScreen(className) {
     }
 }
 
-window.onscroll = function () { scrollFunction(); };
-
+// Show/hide the "back to top" button.
 function scrollFunction() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
         topBtn.style.display = "block";
@@ -82,36 +81,43 @@ function scrollFunction() {
         topBtn.style.display = "none";
     }
 }
-// When the user clicks on the button, scroll to the top of the document
+
+// When the user clicks on the "back to top" button, scroll to the top of the page. 
 function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
 
+// Reset text, images and variables to default values and clear local storage.
 function resetEverything() {
-    // This arrow function is restting variables which must be declared beforehand.
+    // Reset the title text.
     theTitleElement.innerText = theTitleOriginalText;
+    // Reset the dice images.
     diceImagePlayer1.setAttribute("src", "./images/dice6.png");
     diceImagePlayer2.setAttribute("src", "./images/dice6.png");
+    // Reset the database button text.
+    databaseBtn.innerHTML = "🛢 Show results database";
+    // Delete any printed database results from the screen and clear the database.
     deleteResultsDatabaseFromScreen("resultsDatabase");
     window.localStorage.clear();
-    // window.location.reload();
+    // window.location.reload();  // Reload the page.
+    // Reset the status object parameters.
     statusObj["roll counter"] = 0;
     statusObj["previous db length"] = 0;
 }
 
-// Get the HTML elements by class name or ID.
+// Grab the HTML elements.
 const diceImagePlayer1 = document.getElementsByClassName("img1")[0];
 const diceImagePlayer2 = document.getElementsByClassName("img2")[0];
 const rollBtn = document.getElementsByClassName("btnRoll")[0];
 const resetBtn = document.getElementsByClassName("btnReset")[0];
 const databaseBtn = document.getElementsByClassName("btnDatabase")[0];
-const topBtn= document.getElementsByClassName("btnTop")[0];
+const topBtn = document.getElementsByClassName("btnTop")[0];
 const theTitleElement = document.getElementById("title");
 const theTitleOriginalText = theTitleElement.innerHTML;
 const statusObj = { "roll counter": 0, "previous db length": 0 };
 
-// Reset text, images and variables to default values. Clear local storage.
+// Start afresh.
 resetEverything();
 
 // Roll both dice by passing a function with parameters to eventListener via an anonymous function.
@@ -128,3 +134,6 @@ topBtn.addEventListener("click", topFunction);
 
 // Reset the game by resetting the data and images.
 resetBtn.addEventListener("click", resetEverything);
+
+// Show/hide the "back to top" button.
+window.onscroll = function () { scrollFunction(); };
