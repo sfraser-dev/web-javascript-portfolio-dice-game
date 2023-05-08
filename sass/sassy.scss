@@ -6,10 +6,10 @@ $font-family_1: 'Lobster', cursive;
 $font-family_2: 'Indie Flower', cursive;
 $font-family_3: 'Roboto Mono', monospace;
 
-.button-div {
+.btnDiv {
     margin-bottom: 40px;
 }
-.button {
+.btn {
 	display: inline-block;
 	margin-top: 40px;
 	transition-duration: 0.2s;
@@ -29,27 +29,27 @@ $font-family_3: 'Roboto Mono', monospace;
 		color: $color_1;
 	}
 }
-#myBtn {
+.btnTop{
 	display: none;
 	position: fixed;
 	bottom: 20px;
 	right: 30px;
 	z-index: 99;
-	background-color: $color_2;
-	color: $color_1;
-	border-radius: 4px;
-	padding: 8px 8px;
-	font-size: 1.2rem;
-	font-family: $font-family_2;
-	text-decoration: none;
-	border: none;
-	outline: none;
-	cursor: pointer;
-	&:hover {
-		background-color: $color_4;
-		border: none;
-		color: $color_1;
-	}
+	// background-color: $color_2;
+	// color: $color_1;
+	// border-radius: 4px;
+	// padding: 8px 8px;
+	// font-size: 1.2rem;
+	// font-family: $font-family_2;
+	// text-decoration: none;
+	// border: none;
+	// outline: none;
+	// cursor: pointer;
+	// &:hover {
+	// 	background-color: $color_4;
+	// 	border: none;
+	// 	color: $color_1;
+	// }
   }
 .container {
 	width: 70%;

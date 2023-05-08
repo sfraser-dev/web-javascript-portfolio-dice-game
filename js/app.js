@@ -77,9 +77,9 @@ window.onscroll = function () { scrollFunction(); };
 
 function scrollFunction() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        mybutton.style.display = "block";
+        topBtn.style.display = "block";
     } else {
-        mybutton.style.display = "none";
+        topBtn.style.display = "none";
     }
 }
 // When the user clicks on the button, scroll to the top of the document
@@ -106,8 +106,8 @@ const diceImagePlayer2 = document.getElementsByClassName("img2")[0];
 const rollBtn = document.getElementsByClassName("btnRoll")[0];
 const resetBtn = document.getElementsByClassName("btnReset")[0];
 const databaseBtn = document.getElementsByClassName("btnDatabase")[0];
+const topBtn= document.getElementsByClassName("btnTop")[0];
 const theTitleElement = document.getElementById("title");
-let mybutton = document.getElementById("myBtn");
 const theTitleOriginalText = theTitleElement.innerHTML;
 const statusObj = { "roll counter": 0, "previous db length": 0 };
 
@@ -124,7 +124,7 @@ rollBtn.addEventListener("click", function () {
 databaseBtn.addEventListener("click", function () { showResultsDatabase(statusObj); });
 
 // Scroll back to the top button
-mybutton.addEventListener("click", topFunction);
+topBtn.addEventListener("click", topFunction);
 
 // Reset the game by resetting the data and images.
 resetBtn.addEventListener("click", resetEverything);
