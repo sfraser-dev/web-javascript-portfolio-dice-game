@@ -40,7 +40,7 @@ function showResultsDatabase(statusObj) {
     // If there is already database info printed on the page, change the button's text.
     if (window.localStorage.length > 0) {
         let showDbBtn = document.getElementsByClassName("btnDatabase")[0];
-        showDbBtn.innerHTML = "🛢 Update databse with any new dice rolls";
+        showDbBtn.innerHTML = "🛢 Update database with any new dice rolls";
     }
     // Need to delete any previously shown results (or they will just concatenate).
     deleteResultsDatabaseFromScreen("resultsDatabase");
@@ -96,7 +96,7 @@ function resetEverything() {
     diceImagePlayer1.setAttribute("src", "./images/dice6.png");
     diceImagePlayer2.setAttribute("src", "./images/dice6.png");
     // Reset the database button text.
-    databaseBtn.innerHTML = "🛢 Show results database";
+    databaseBtn.innerHTML = databaseBtnOriginalText;
     // Delete any printed database results from the screen and clear the database.
     deleteResultsDatabaseFromScreen("resultsDatabase");
     window.localStorage.clear();
@@ -112,6 +112,7 @@ const diceImagePlayer2 = document.getElementsByClassName("img2")[0];
 const rollBtn = document.getElementsByClassName("btnRoll")[0];
 const resetBtn = document.getElementsByClassName("btnReset")[0];
 const databaseBtn = document.getElementsByClassName("btnDatabase")[0];
+const databaseBtnOriginalText = databaseBtn.innerHTML;
 const topBtn = document.getElementsByClassName("btnTop")[0];
 const theTitleElement = document.getElementById("title");
 const theTitleOriginalText = theTitleElement.innerHTML;
