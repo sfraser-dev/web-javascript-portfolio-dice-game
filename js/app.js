@@ -61,6 +61,8 @@ function showResultsDatabase(statusObj) {
         newParagraph.innerText = theOutputText;
         document.body.append(newParagraph);
     }
+    // scroll to bottom of the page (to easily see new database entries)
+    window.scrollTo(0, document.body.scrollHeight);
 }
 
 // Remove results database from page.
@@ -69,6 +71,21 @@ function deleteResultsDatabaseFromScreen(className) {
     while (elements.length > 0) {
         elements[0].parentNode.removeChild(elements[0]);
     }
+}
+
+window.onscroll = function () { scrollFunction(); };
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 }
 
 function resetEverything() {
@@ -90,6 +107,7 @@ const rollBtn = document.getElementsByClassName("btnRoll")[0];
 const resetBtn = document.getElementsByClassName("btnReset")[0];
 const databaseBtn = document.getElementsByClassName("btnDatabase")[0];
 const theTitleElement = document.getElementById("title");
+let mybutton = document.getElementById("myBtn");
 const theTitleOriginalText = theTitleElement.innerHTML;
 const statusObj = { "roll counter": 0, "previous db length": 0 };
 
@@ -104,6 +122,9 @@ rollBtn.addEventListener("click", function () {
 
 // Button to show dice throw results database.
 databaseBtn.addEventListener("click", function () { showResultsDatabase(statusObj); });
+
+// Scroll back to the top button
+mybutton.addEventListener("click", topFunction);
 
 // Reset the game by resetting the data and images.
 resetBtn.addEventListener("click", resetEverything);
