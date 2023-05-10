@@ -38,7 +38,7 @@ function playGame(diceImg1, diceImg2) {
         JSON.stringify({ "P1": p1Roll, "P2": p2Roll }));
 
     const theOutputHtml =
-        `Round ${theLen}, Player1: ${p1Roll}, Player2: ${p2Roll}<br>`;
+        `Round ${theLen+1}, Player1: ${p1Roll}, Player2: ${p2Roll}<br>`;
     theParagraphDbElement.innerHTML += theOutputHtml;
     // showResultsDatabase(statusObj);
 }
