@@ -6,7 +6,7 @@ $font-family_1: 'Lobster', cursive;
 $font-family_2: 'Indie Flower', cursive;
 $font-family_3: 'Roboto Mono', monospace;
 
-.btnDiv {
+.btnContainer {
     margin-bottom: 40px;
 }
 .btn {
@@ -29,7 +29,7 @@ $font-family_3: 'Roboto Mono', monospace;
 		color: $color_1;
 	}
 }
-.btnTop{
+.btnBackToTop{
 	display: none;
 	position: fixed;
 	bottom: 20px;
@@ -45,9 +45,9 @@ $font-family_3: 'Roboto Mono', monospace;
 	width: 20%;
 	height: auto;
 }
-.resultsDatabase{
+#pDatabase{
 	font-family: $font-family_3;
-    font-size: 0.85rem;
+    font-size: 1.1rem;
 }
 body {
 	background-color: $color_1;

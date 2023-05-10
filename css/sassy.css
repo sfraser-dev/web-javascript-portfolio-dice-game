@@ -1,4 +1,4 @@
-.btnDiv {
+.btnContainer {
   margin-bottom: 40px;
 }
 
@@ -23,7 +23,7 @@
   color: #393E46;
 }
 
-.btnTop {
+.btnBackToTop {
   display: none;
   position: fixed;
   bottom: 20px;
@@ -42,9 +42,9 @@
   height: auto;
 }
 
-.resultsDatabase {
+#pDatabase {
   font-family: "Roboto Mono", monospace;
-  font-size: 0.85rem;
+  font-size: 1.1rem;
 }
 
 body {
