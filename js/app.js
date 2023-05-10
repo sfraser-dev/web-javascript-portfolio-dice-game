@@ -23,9 +23,9 @@ function playGame(diceImg1, diceImg2, titleElement, statusObj) {
     // Update the dice images.
     diceImg1.setAttribute("src", `images/dice${p1Roll}.png`);
     diceImg2.setAttribute("src", `images/dice${p2Roll}.png`);
-    // Print who wins this round in the title (h1 heading).
+    // Print who wins this round in the title (h1 element).
     printOutcomeOfDiceRolls(p1Roll, p2Roll, titleElement);
-    // For each round, store the dice values of each player in JSON format.
+    // For each round, add the dice values of each player (in JSON format) to local storage.
     window.localStorage.setItem(statusObj["roll counter"]++,
         JSON.stringify({ "P1": p1Roll, "P2": p2Roll }));
 }
