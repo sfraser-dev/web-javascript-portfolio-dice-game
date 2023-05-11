@@ -57,6 +57,8 @@ function backToTopFunction() {
     document.documentElement.scrollTop = 0;
 }
 
+// Initialise. If there is data in the "database", use that so we continue off from the previous
+// state of the game. If there is no data in the "database", then start game from default state.
 function init() {
     if (window.localStorage.length > 0) {
         let lastDiceRollP1 = -1;
@@ -86,11 +88,11 @@ function init() {
         // Scroll to bottom of the page (to easily see new database entries).
         window.scrollTo(0, document.body.scrollHeight);
     }
-    // Else there is no data in the database.
+    // Else there is no data in the database, default state for game.
     else {
+        theTitleElement.innerText = "The Dice Game";
         diceImagePlayer1.setAttribute("src", "./images/dice6.png");
         diceImagePlayer2.setAttribute("src", "./images/dice6.png");
-
     }
 }
 
@@ -108,7 +110,11 @@ function resetEverything() {
     // window.location.reload();  // Reload the page.
 }
 
-//----- Main
+// Automatcally show/hide the "back to top" button.
+window.onscroll = function () { backToTopScrollFunction(); };
+
+//----- Main -----//
+
 // Grab the HTML elements.
 const diceImagePlayer1 = document.getElementsByClassName("img1")[0];
 const diceImagePlayer2 = document.getElementsByClassName("img2")[0];
@@ -119,6 +125,7 @@ const theTitleElement = document.getElementById("title");
 const theParagraphDbElement = document.getElementById("pDatabase");
 const theTitleOriginalText = theTitleElement.innerHTML;
 
+// Initialise game state.
 init();
 
 // Roll both dice by passing a function with parameters to eventListener via an anonymous function.
@@ -131,6 +138,3 @@ backToTopBtn.addEventListener("click", backToTopFunction);
 
 // Reset the game by resetting the data and images.
 resetBtn.addEventListener("click", resetEverything);
-
-// Automatcally show/hide the "back to top" button.
-window.onscroll = function () { backToTopScrollFunction(); };
