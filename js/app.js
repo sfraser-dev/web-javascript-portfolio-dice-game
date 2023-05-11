@@ -145,13 +145,13 @@ function init() {
 function resetEverything() {
     // Reset the title text.
     theTitleElement.innerText = theTitleOriginalText;
+    // Reset the statistics text.
+    theParagraphStatsElement.innerHTML = theStatsOriginalText;
     // Reset the dice images.
     diceImagePlayer1.setAttribute("src", "./images/dice6.png");
     diceImagePlayer2.setAttribute("src", "./images/dice6.png");
     // Delete any printed database results from the screen.
     theParagraphDbElement.innerHTML = ""; 
-    // Delete any printed stats from the screen.
-    theParagraphStatsElement.innerHTML = "";
     // Clear the local storage "database".
     window.localStorage.clear();
     // window.location.reload();  // Reload the page.
@@ -172,6 +172,7 @@ const theTitleElement = document.getElementById("title");
 const theParagraphDbElement = document.getElementById("pDatabase");
 const theParagraphStatsElement = document.getElementById("pStats");
 const theTitleOriginalText = theTitleElement.innerHTML;
+const theStatsOriginalText = theParagraphStatsElement.innerHTML;
 
 // Initialise game state.
 init();
