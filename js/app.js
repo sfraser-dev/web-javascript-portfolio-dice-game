@@ -61,8 +61,6 @@ function backToTopFunction() {
 // state of the game. If there is no data in the "database", then start game from default state.
 function init() {
     if (window.localStorage.length > 0) {
-        let lastDiceRollP1 = -1;
-        let lastDiceRollP2 = -1;
         // Local storage acts like an object which doesn't have order, need to order manually.
         let orderedArrVals = new Array(window.localStorage.length).fill(0);
         for (let i = 0; i < window.localStorage.length; i++) {
@@ -77,10 +75,10 @@ function init() {
                 `Round ${i + 1}, Player1: ${orderedArrVals[i]["P1"]}, Player2: ${orderedArrVals[i]["P2"]}<br>`;
             // Print to page.
             theParagraphDbElement.innerHTML += theOutputHtml;
-            lastDiceRollP1 = orderedArrVals[i]["P1"];
-            lastDiceRollP2 = orderedArrVals[i]["P2"];
         }
         // Set the dice images to the last values in the database.
+        const lastDiceRollP1 = orderedArrVals[orderedArrVals.length-1]["P1"];
+        const lastDiceRollP2 = orderedArrVals[orderedArrVals.length-1]["P2"];
         diceImagePlayer1.setAttribute("src", `./images/dice${lastDiceRollP1}.png`);
         diceImagePlayer2.setAttribute("src", `./images/dice${lastDiceRollP2}.png`);
         // Print who wins this round in the title (h1 element).
