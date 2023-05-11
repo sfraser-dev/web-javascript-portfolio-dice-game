@@ -42,7 +42,7 @@
   height: auto;
 }
 
-#pDatabase {
+#pDatabase, #pStats {
   font-family: "Roboto Mono", monospace;
   font-size: 1.1rem;
 }

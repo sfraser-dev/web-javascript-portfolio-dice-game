@@ -41,7 +41,7 @@ function playGame(diceImg1, diceImg2) {
     // Print who wins this round in the title (H1 element).
     const theWinner = printOutcomeOfDiceRollsToH1(p1Roll, p2Roll);
     // Append current dice rolls just made to the local storage database too.
-    // The local storage key is essentially a zero indexed array.
+    // The local storage key is a zero indexed array.
     // Roll 1 has index 0, roll 2 has index 1, roll 3 has index 2, etc.
     // So the length of local storage gives the next index to be used for insertion.
     const theLen = window.localStorage.length;
@@ -53,7 +53,7 @@ function playGame(diceImg1, diceImg2) {
         `Round ${theLen+1}, Player1: ${p1Roll}, Player2: ${p2Roll}<br>`;
     theParagraphDbElement.innerHTML += theOutputHtml;
     // Update the statistics string. This string is in format: 
-    // "Statistics: Player 1 wins: NUMBER, Player 2 wins NUMBER, Draws: NUMBER" 
+    // "Rounds: NUMBER, Player 1 wins: NUMBER, Player 2 wins NUMBER, Draws: NUMBER" 
     let arrOfStr1 = theParagraphStatsElement.innerText.split("Player 1 wins: ");
     let arrOfStr2 = arrOfStr1[1].split(", Player 2 wins: ");
     let p1Wins = arrOfStr2[0]; 
@@ -72,7 +72,7 @@ function playGame(diceImg1, diceImg2) {
     } else {
         console.log("winner error!");
     }
-    theParagraphStatsElement.innerHTML = "Statistics: Player 1 wins: " + p1Wins +
+    theParagraphStatsElement.innerHTML = "Rounds: " + (theLen+1) + ", Player 1 wins: " + p1Wins +
         ", Player 2 wins: " + p2Wins + ", Draws: " + drawNumber; 
 }
 
@@ -123,8 +123,9 @@ function init() {
             }
         }
         // Print stats to the page. MUST KEEP THIS FORMAT as it's updated later via string split().
-        theParagraphStatsElement.innerHTML = "Statistics: Player 1 wins: " + p1WinCount + ", Player 2 wins: " +
-            p2WinCount + ", Draws: " + drawCount;
+        theParagraphStatsElement.innerHTML = "Rounds: " + orderedArrVals.length +
+            ", Player 1 wins: " + p1WinCount + ", Player 2 wins: " + p2WinCount +
+            ", Draws: " + drawCount;
         // Set the dice images to the last values in the database.
         const lastDiceRollP1 = orderedArrVals[orderedArrVals.length-1]["P1"];
         const lastDiceRollP2 = orderedArrVals[orderedArrVals.length-1]["P2"];
