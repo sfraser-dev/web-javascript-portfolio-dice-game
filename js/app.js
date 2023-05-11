@@ -19,14 +19,14 @@ function printOutcomeOfDiceRollsToH1(p1, p2) {
     theTitleElement.innerText = (p1 > p2) ? "player 1 wins" : ((p2 > p1) ? "player 2 wins" : "it's a draw");
 }
 
-// Play a single round of the game (roll dice for player 1 and player 2).
+// Play a single round of the game (roll dice for player 1 and for player 2).
 function playGame(diceImg1, diceImg2) {
     let p1Roll = rollTheDice();
     let p2Roll = rollTheDice();
     // Update the dice images.
     diceImg1.setAttribute("src", `images/dice${p1Roll}.png`);
     diceImg2.setAttribute("src", `images/dice${p2Roll}.png`);
-    // Print who wins this round in the title (h1 element).
+    // Print who wins this round in the title (H1 element).
     printOutcomeOfDiceRollsToH1(p1Roll, p2Roll);
     // Append current dice rolls just made to the local storage database too.
     // The local storage key is essentially a zero indexed array.
@@ -81,14 +81,12 @@ function init() {
         const lastDiceRollP2 = orderedArrVals[orderedArrVals.length-1]["P2"];
         diceImagePlayer1.setAttribute("src", `./images/dice${lastDiceRollP1}.png`);
         diceImagePlayer2.setAttribute("src", `./images/dice${lastDiceRollP2}.png`);
-        // Print who wins this round in the title (h1 element).
+        // Print who won the last round of the game in the title (H1 element).
         printOutcomeOfDiceRollsToH1(lastDiceRollP1, lastDiceRollP2);
-        // Scroll to bottom of the page (to easily see new database entries).
-        window.scrollTo(0, document.body.scrollHeight);
     }
     // Else there is no data in the database, default state for game.
     else {
-        theTitleElement.innerText = "The Dice Game";
+        theTitleElement.innerText = theTitleOriginalText;
         diceImagePlayer1.setAttribute("src", "./images/dice6.png");
         diceImagePlayer2.setAttribute("src", "./images/dice6.png");
     }
