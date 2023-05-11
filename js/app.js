@@ -15,8 +15,20 @@ function rollTheDice() {
 }
 
 // Determine winner of dice roll round and update the H1 element with the result.
+// Return 0 if it was a draw, return 1 if player1 won and return 2 if player2 won.
 function printOutcomeOfDiceRollsToH1(p1, p2) {
-    theTitleElement.innerText = (p1 > p2) ? "player 1 wins" : ((p2 > p1) ? "player 2 wins" : "it's a draw");
+    let retVal = -1;
+    if (p1 > p2) {
+        theTitleElement.innerText = "player 1 wins"; 
+        retVal = 1;
+    } else if (p2 > p1) {
+        theTitleElement.innerText = "player 2 wins"; 
+        retVal = 2;
+    } else {
+        theTitleElement.innerText = "it's a draw"; 
+        retVal = 0;
+    }
+    return retVal;
 }
 
 // Play a single round of the game (roll dice for player 1 and for player 2).
@@ -27,7 +39,7 @@ function playGame(diceImg1, diceImg2) {
     diceImg1.setAttribute("src", `images/dice${p1Roll}.png`);
     diceImg2.setAttribute("src", `images/dice${p2Roll}.png`);
     // Print who wins this round in the title (H1 element).
-    printOutcomeOfDiceRollsToH1(p1Roll, p2Roll);
+    const theWinner = printOutcomeOfDiceRollsToH1(p1Roll, p2Roll);
     // Append current dice rolls just made to the local storage database too.
     // The local storage key is essentially a zero indexed array.
     // Roll 1 has index 0, roll 2 has index 1, roll 3 has index 2, etc.
@@ -40,6 +52,28 @@ function playGame(diceImg1, diceImg2) {
     const theOutputHtml =
         `Round ${theLen+1}, Player1: ${p1Roll}, Player2: ${p2Roll}<br>`;
     theParagraphDbElement.innerHTML += theOutputHtml;
+    // Update the statistics string. This string is in format: 
+    // "Statistics: Player 1 wins: NUMBER, Player 2 wins NUMBER, Draws: NUMBER" 
+    let arrOfStr1 = theParagraphStatsElement.innerText.split("Player 1 wins: ");
+    let arrOfStr2 = arrOfStr1[1].split(", Player 2 wins: ");
+    let p1Wins = arrOfStr2[0]; 
+    arrOfStr1 = theParagraphStatsElement.innerText.split("Player 2 wins: ");
+    arrOfStr2 = arrOfStr1[1].split(", Draws: ");
+    let p2Wins = arrOfStr2[0];
+    arrOfStr1 = theParagraphStatsElement.innerText.split("Draws: ");
+    arrOfStr2 = arrOfStr1[1];
+    let drawNumber = arrOfStr2[0];
+    if (theWinner===1){
+        p1Wins++;
+    } else if (theWinner===2) {
+        p2Wins++;
+    } else if (theWinner===0) {
+        drawNumber++;
+    } else {
+        console.log("winner error!");
+    }
+    theParagraphStatsElement.innerHTML = "Statistics: Player 1 wins: " + p1Wins +
+        ", Player 2 wins: " + p2Wins + ", Draws: " + drawNumber; 
 }
 
 // Automatically show/hide the "back to top" button.
@@ -69,13 +103,28 @@ function init() {
             const valueObj = JSON.parse(window.localStorage.getItem(key));
             orderedArrVals[key] = valueObj;
         }
-        // Print ordered results database to page.
+        // Print ordered results database to page and calculate stats.
+        let p1WinCount = 0;
+        let p2WinCount = 0;
+        let drawCount = 0;
         for (let i = 0; i < orderedArrVals.length; i++) {
+            const p1Val = orderedArrVals[i]["P1"];
+            const p2Val = orderedArrVals[i]["P2"];
             const theOutputHtml =
-                `Round ${i + 1}, Player1: ${orderedArrVals[i]["P1"]}, Player2: ${orderedArrVals[i]["P2"]}<br>`;
+                `Round ${i + 1}, Player1: ${p1Val}, Player2: ${p2Val}<br>`;
             // Print to page.
             theParagraphDbElement.innerHTML += theOutputHtml;
+            if (p1Val > p2Val) {
+                p1WinCount++;
+            } else if (p2Val > p1Val) {
+                p2WinCount++;
+            } else {
+                drawCount++;
+            }
         }
+        // Print stats to the page. MUST KEEP THIS FORMAT as it's updated later via string split().
+        theParagraphStatsElement.innerHTML = "Statistics: Player 1 wins: " + p1WinCount + ", Player 2 wins: " +
+            p2WinCount + ", Draws: " + drawCount;
         // Set the dice images to the last values in the database.
         const lastDiceRollP1 = orderedArrVals[orderedArrVals.length-1]["P1"];
         const lastDiceRollP2 = orderedArrVals[orderedArrVals.length-1]["P2"];
@@ -101,6 +150,8 @@ function resetEverything() {
     diceImagePlayer2.setAttribute("src", "./images/dice6.png");
     // Delete any printed database results from the screen.
     theParagraphDbElement.innerHTML = ""; 
+    // Delete any printed stats from the screen.
+    theParagraphStatsElement.innerHTML = "";
     // Clear the local storage "database".
     window.localStorage.clear();
     // window.location.reload();  // Reload the page.
@@ -119,6 +170,7 @@ const resetBtn = document.getElementsByClassName("btnReset")[0];
 const backToTopBtn = document.getElementsByClassName("btnBackToTop")[0];
 const theTitleElement = document.getElementById("title");
 const theParagraphDbElement = document.getElementById("pDatabase");
+const theParagraphStatsElement = document.getElementById("pStats");
 const theTitleOriginalText = theTitleElement.innerHTML;
 
 // Initialise game state.
