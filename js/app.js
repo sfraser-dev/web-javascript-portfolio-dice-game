@@ -1,7 +1,9 @@
 // A simple two player dice game. The results of each round are stored in local 
-// storage ("database") in JSON format. The user can print the "database" to screen.
-// The user can also simultaneously reset the game and clear the "database".
-// UPDATE THIS - THIS NEEDS CHANGED **********************
+// storage ("database") in JSON format. The "database" is shown and updated on the
+// page in real-time. The "database" will persist after browser close and computer
+// shutdown - the game will continue from previous state on reactivation. The dice
+// game continues on and on until the user resets the game and clears the "database"
+// via a button click. 
 
 "use strict";
 
@@ -12,7 +14,7 @@ function rollTheDice() {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Determine winner of dice roll round and update h1 element with the result.
+// Determine winner of dice roll round and update the H1 element with the result.
 function printOutcomeOfDiceRollsToH1(p1, p2) {
     theTitleElement.innerText = (p1 > p2) ? "player 1 wins" : ((p2 > p1) ? "player 2 wins" : "it's a draw");
 }
@@ -26,71 +28,22 @@ function playGame(diceImg1, diceImg2) {
     diceImg2.setAttribute("src", `images/dice${p2Roll}.png`);
     // Print who wins this round in the title (h1 element).
     printOutcomeOfDiceRollsToH1(p1Roll, p2Roll);
-    // For each round, add the dice values of each player (in JSON format) to local storage.
-    // window.localStorage.setItem(statusObj["roll counter"]++,
-    //     JSON.stringify({ "P1": p1Roll, "P2": p2Roll }));
-
-    // Append current dice rolls to the pDatabase too
-    // Get the last key in DB
+    // Append current dice rolls just made to the local storage database too.
+    // The local storage key is essentially a zero indexed array.
+    // Roll 1 has index 0, roll 2 has index 1, roll 3 has index 2, etc.
+    // So the length of local storage gives the next index to be used for insertion.
     const theLen = window.localStorage.length;
-    
+    // Add to local storage database in JSON format.
     window.localStorage.setItem(theLen,
         JSON.stringify({ "P1": p1Roll, "P2": p2Roll }));
-
+    // Update the local storage database that is printed on the page.
     const theOutputHtml =
         `Round ${theLen+1}, Player1: ${p1Roll}, Player2: ${p2Roll}<br>`;
     theParagraphDbElement.innerHTML += theOutputHtml;
-    // showResultsDatabase(statusObj);
 }
 
-// Get data from local storage and show it on the page.
-//function showResultsDatabase(statusObj) {
-// // Alert user if attempting to see updated database without there being any more dice rolls. 
-// if (window.localStorage.length === statusObj["previous db length"]) {
-//     alert("No new dice rolls have been added to the database since the last check.");
-// }
-// statusObj["previous db length"] = window.localStorage.length;
-
-// // If there is already database info printed on the page, change the button's text.
-// if (window.localStorage.length > 0) {
-//     let showDbBtn = document.getElementsByClassName("btnDatabase")[0];
-//     showDbBtn.innerHTML = "🛢 Show new dice rolls in updated database";
-// }
-
-// // Need to delete any previously shown results (or they will just concatenate).
-// deleteResultsDatabaseFromScreen("resultsDatabase");
-
-// Local storage acts like an object which doesn't have order, need to order manually.
-// let orderedArrVals = new Array(window.localStorage.length).fill(0);
-// for (let i = 0; i < window.localStorage.length; i++) {
-//     // Get the key/value pairs from local storage. The key is a counter and values are JSON data.
-//     const key = window.localStorage.key(i);
-//     const valueObj = JSON.parse(window.localStorage.getItem(key));
-//     orderedArrVals[key] = valueObj;
-// }
-// // Print ordered results database to page.
-// for (let i = 0; i < orderedArrVals.length; i++) {
-//     const newParagraph = document.createElement("p");
-//     newParagraph.setAttribute("class", "resultsDatabase");
-//     const theOutputText =
-//         `Round ${i + 1}, Player1: ${orderedArrVals[i]["P1"]}, Player2: ${orderedArrVals[i]["P2"]}`;
-//     newParagraph.innerText = theOutputText;
-//     document.body.append(newParagraph);
-// }
-// // scroll to bottom of the page (to easily see new database entries)
-// window.scrollTo(0, document.body.scrollHeight);
-// }
-
-// Remove results database from page.
-// function deleteResultsDatabaseFromScreen(className) {
-//     const elements = document.getElementsByClassName(className);
-//     while (elements.length > 0) {
-//         elements[0].parentNode.removeChild(elements[0]);
-//     }
-// }
-
-// Show/hide the "back to top" button.
-function scrollFunction() {
+// Automatically show/hide the "back to top" button.
+function backToTopScrollFunction() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
         backToTopBtn.style.display = "block";
     } else {
@@ -99,15 +52,15 @@ function scrollFunction() {
 }
 
 // When the user clicks on the "back to top" button, scroll to the top of the page. 
-function topFunction() {
+function backToTopFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
 
 function init() {
     if (window.localStorage.length > 0) {
-        let lastDiceRollP1;
-        let lastDiceRollP2;
+        let lastDiceRollP1 = -1;
+        let lastDiceRollP2 = -1;
         // Local storage acts like an object which doesn't have order, need to order manually.
         let orderedArrVals = new Array(window.localStorage.length).fill(0);
         for (let i = 0; i < window.localStorage.length; i++) {
@@ -118,16 +71,14 @@ function init() {
         }
         // Print ordered results database to page.
         for (let i = 0; i < orderedArrVals.length; i++) {
-            // const newParagraph = document.createElement("p");
-            // newParagraph.setAttribute("class", "resultsDatabase");
-            // const pDb = document.getElementById("pDatabase");
             const theOutputHtml =
                 `Round ${i + 1}, Player1: ${orderedArrVals[i]["P1"]}, Player2: ${orderedArrVals[i]["P2"]}<br>`;
+            // Print to page.
             theParagraphDbElement.innerHTML += theOutputHtml;
             lastDiceRollP1 = orderedArrVals[i]["P1"];
             lastDiceRollP2 = orderedArrVals[i]["P2"];
         }
-        // Set dice to the last values in the database
+        // Set the dice images to the last values in the database.
         diceImagePlayer1.setAttribute("src", `./images/dice${lastDiceRollP1}.png`);
         diceImagePlayer2.setAttribute("src", `./images/dice${lastDiceRollP2}.png`);
         // Print who wins this round in the title (h1 element).
@@ -150,16 +101,11 @@ function resetEverything() {
     // Reset the dice images.
     diceImagePlayer1.setAttribute("src", "./images/dice6.png");
     diceImagePlayer2.setAttribute("src", "./images/dice6.png");
-    // Reset the database button text.
-    databaseBtn.innerHTML = databaseBtnOriginalText;
-    // Delete any printed database results from the screen and clear the database.
-    // deleteResultsDatabaseFromScreen("pDatabase");
+    // Delete any printed database results from the screen.
     theParagraphDbElement.innerHTML = ""; 
+    // Clear the local storage "database".
     window.localStorage.clear();
     // window.location.reload();  // Reload the page.
-    // Reset the status object parameters.
-    // statusObj["roll counter"] = 0;
-    // statusObj["previous db length"] = 0;
 }
 
 //----- Main
@@ -168,32 +114,23 @@ const diceImagePlayer1 = document.getElementsByClassName("img1")[0];
 const diceImagePlayer2 = document.getElementsByClassName("img2")[0];
 const rollBtn = document.getElementsByClassName("btnRoll")[0];
 const resetBtn = document.getElementsByClassName("btnReset")[0];
-const databaseBtn = document.getElementsByClassName("btnDatabase")[0];
-const databaseBtnOriginalText = databaseBtn.innerHTML;
 const backToTopBtn = document.getElementsByClassName("btnBackToTop")[0];
 const theTitleElement = document.getElementById("title");
 const theParagraphDbElement = document.getElementById("pDatabase");
 const theTitleOriginalText = theTitleElement.innerHTML;
-const statusObj = { "roll counter": 0, "previous db length": 0 };
 
 init();
-
-// Start afresh.
-//resetEverything();
 
 // Roll both dice by passing a function with parameters to eventListener via an anonymous function.
 rollBtn.addEventListener("click", function () {
     playGame(diceImagePlayer1, diceImagePlayer2);
 });
 
-// Button to show dice throw results database.
-// databaseBtn.addEventListener("click", function () { showResultsDatabase(statusObj); });
-
 // Scroll back to the top button
-backToTopBtn.addEventListener("click", topFunction);
+backToTopBtn.addEventListener("click", backToTopFunction);
 
 // Reset the game by resetting the data and images.
 resetBtn.addEventListener("click", resetEverything);
 
-// Show/hide the "back to top" button.
-window.onscroll = function () { scrollFunction(); };
+// Automatcally show/hide the "back to top" button.
+window.onscroll = function () { backToTopScrollFunction(); };
