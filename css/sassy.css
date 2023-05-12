@@ -10,7 +10,7 @@
   color: #393E46;
   border-radius: 4px;
   padding: 8px 8px;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   font-family: "Indie Flower", cursive;
   text-decoration: none;
   border: none;
@@ -38,13 +38,13 @@
 
 .dice {
   display: inline-block;
-  width: 20%;
+  width: 45%;
   height: auto;
 }
 
 #pDatabase, #pStats {
   font-family: "Roboto Mono", monospace;
-  font-size: 1.1rem;
+  font-size: 0.6rem;
 }
 
 body {
@@ -53,19 +53,96 @@ body {
 }
 
 h1 {
-  margin: 30px;
+  margin: 20px;
   font-family: "Lobster", cursive;
   text-shadow: 5px 0 #232931;
-  font-size: 4rem;
+  font-size: 1.5rem;
   color: #4ECCA3;
 }
 
 p {
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: #4ECCA3;
   font-family: "Indie Flower", cursive;
 }
 
 img {
   width: 70%;
+}
+
+@media only screen and (min-width: 400px) {
+  h1 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1.2rem;
+  }
+  #pDatabase, #pStats {
+    font-size: 0.75rem;
+  }
+  .btn {
+    font-size: 1.1rem;
+  }
+  .dice {
+    width: 40%;
+  }
+}
+@media only screen and (min-width: 600px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  p {
+    font-size: 1.5rem;
+  }
+  #pDatabase, #pStats {
+    font-size: 0.8rem;
+  }
+  .btn {
+    font-size: 1.15rem;
+  }
+  .dice {
+    width: 170px;
+  }
+}
+@media only screen and (min-width: 800px) {
+  h1 {
+    font-size: 3.5rem;
+  }
+  p {
+    font-size: 1.7rem;
+  }
+  #pDatabase, #pStats {
+    font-size: 0.9rem;
+  }
+  .btn {
+    font-size: 1.2rem;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  h1 {
+    font-size: 4.5rem;
+  }
+  p {
+    font-size: 2rem;
+  }
+  #pDatabase, #pStats {
+    font-size: 1.2rem;
+  }
+  .btn {
+    font-size: 1.4rem;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  h1 {
+    font-size: 5.5rem;
+  }
+  p {
+    font-size: 2.1rem;
+  }
+  #pDatabase, #pStats {
+    font-size: 1.3rem;
+  }
+  .btn {
+    font-size: 1.6rem;
+  }
 }
