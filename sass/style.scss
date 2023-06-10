@@ -2,7 +2,8 @@ $color_1: #393E46;      // general background color and button text color
 $color_2: #4ECCA3;      // general text color and button background color
 $color_3: #232931;      // heading shadow color
 $color_4: #AEf5DD;      // button background color hover
-$font-family_1: 'Lobster', cursive;
+
+$font-family_1: cursive;
 $font-family_2: 'Indie Flower', cursive;
 $font-family_3: 'Roboto Mono', monospace;
 
@@ -18,7 +19,7 @@ $font-family_3: 'Roboto Mono', monospace;
 	border-radius: 4px;
 	padding: 8px 8px;
 	font-size: 0.8rem;
-	font-family: $font-family_2;
+	font-family: $font-family_1;
 	text-decoration: none;
 	border: none;
 	outline: none;
@@ -56,7 +57,6 @@ body {
 h1 {
 	margin: 20px 20px 5px 20px;
 	font-family: $font-family_1;
-	text-shadow: 5px 0 $color_3;
 	font-size: 1.5rem;
 	color: $color_2;
 }
