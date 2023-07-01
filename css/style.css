@@ -33,6 +33,8 @@
 /* A single media query. Strong emphasis on mobile-first design
 with centered and width-limited body makes larger screens
 essentially just bigger phones. */
+/* Device emulator: works fine with JioPhone2-240px and 
+GalaxyFold-280px, looks good on iPhone4-320px */
 @media only screen and (min-width: 401px) {
     .my-body-limit-width-and-center {
         max-width: 380px;
