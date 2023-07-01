@@ -1,46 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>Dice Game</title>
-  <link rel="icon" href="./images/dice-16.png">
-  <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/style.css">
-  <script src="./js/app.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="./images/dice-16.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <script defer src="./js/app.js"></script>
+    <link rel="stylesheet" href="./css/w3.css">
+    <link rel="stylesheet" href="./css/w3-theme-blue-grey.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
-<body>
-  <div class="container">
-    <h1 id="title">Dice Game</h1>
+<!-- Mobile-first design limiting body width (and centering body) -->
+<body class="my-body-limit-width-and-center w3-theme w3-center">
 
-    <div class="dice">
-      <p>Player 1</p>
-      <img class="img1" src="./images/dice6.png" alt="dice-img">
-    </div>
+    <h1 id="header-title">The Dice Game</h1>
 
-    <div class="dice">
-      <p>Player 2</p>
-      <img class="img2" src="./images/dice6.png" alt="dice-img">
-    </div>
+    <!-- The dice images. -->
+    <p>
+        Player 1
+        <img id="dice-image-1" class="my-margin-right-wee" src="./images/dice6.png" alt="dice image">
+        <img id="dice-image-2" class="my-margin-left-wee" src="./images/dice6.png" alt="dice image">
+        Player 2
+    </p>
 
-    <div class="btnContainer">
-      <br>
-      <button type="button" class="btn btnRoll">
-        Roll the dice (and store results in database)</button>
+    <!-- The control buttons. -->
+    <p>
+        <button type="button" id="button-roll" class="w3-button w3-theme-dark w3-round-small">Roll dice</button>
+        <button type="button" id="button-reset" class="w3-button w3-theme-dark w3-round-small">Reset game</button>
+    </p>
 
-      <br>
-      <button type="button" class="btn btnReset">
-        Reset the game &amp; clear results database
-      </button>
+    <!-- A button which will appear when scrolling down - clicking it will take you back to the top. -->
+    <button type="button" id="button-back-to-top" class="w3-button w3-theme-dark w3-round-small" title="Go to top">Top</button>
 
-      <button type="button" class="btn btnBackToTop" title="Go to top">Top</button>
+    <!-- Table to show the stats of the dice throw results. -->
+    <table id="table-stats" class="w3-table w3-border w3-centered w3-theme-d2">
+        <tbody>
+            <tr>
+                <th scope="col">Rounds</th>
+                <th scope="col">P1-Wins</th>
+                <th scope="col">P2-Wins</th>
+                <th scope="col">Draws</th>
+            </tr>
+        </tbody>
+    </table>
 
-      <p id="pStats">Rounds: 0, Player 1 wins: 0, Player 2 wins: 0, Draws: 0</p>
-      <p id="pDatabase"></p>
-    </div>
-  </div>
+    <!-- Paragraph that will have the result of each roll appended to it. -->
+    <p id="paragraph-to-append"></p>
 </body>
 
 </html>
