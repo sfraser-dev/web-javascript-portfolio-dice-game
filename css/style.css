@@ -19,6 +19,35 @@
     margin: 2px;
 }
 
+#button-back-to-top {
+    font-size: 0.6rem;
+    padding: 4px 8px;
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+}
+
+#button-roll,
+#button-reset,
+#button-back-to-top {
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#button-roll:hover,
+#button-reset:hover,
+#button-back-to-top:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+#button-roll:active,
+#button-reset:active,
+#button-back-to-top:active {
+    transform: scale(0.98);
+}
+
 #paragraph-to-append,
 #paragraph-stats {
     font-size: 0.6rem;
@@ -37,13 +66,40 @@
 .my-margin-left-wee{margin-left:4px}
 .my-margin-right-wee{margin-right:4px}
 
-#button-back-to-top {
-    font-size: 0.6rem;
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 30px;
-    z-index: 99;
+/***** Animations *****/
+/* Wobbly dice animation on roll */
+.dice-roll-animation {
+    animation: dice-roll 0.3s ease;
+}
+
+@keyframes dice-roll {
+    0%   { transform: rotate(0deg) scale(1); }
+    25%  { transform: rotate(6deg) scale(1.03); }
+    50%  { transform: rotate(-6deg) scale(1.03); }
+    75%  { transform: rotate(3deg) scale(1.01); }
+    100% { transform: rotate(0deg) scale(1); }
+}
+
+/* Results table fade in results line */
+.roll-result-line {
+    display: block;
+    opacity: 0;
+    animation: fadeIn 0.75s ease forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/*  Header flash animation */
+@keyframes flashText {
+    0%   { opacity: 0.3; transform: scale(0.95); }
+    50%  { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.header-flash {
+    animation: flashText 0.4s ease forwards;
 }
 
 /* A single media query. Strong emphasis on mobile-first design
@@ -72,6 +128,10 @@ GalaxyFold-280px, looks good on iPhone4-320px */
         padding: 4px 8px;
     }
 
+    #button-back-to-top {
+        font-size: 1rem;
+    }
+
     #paragraph-to-append,
     #paragraph-stats {
         font-size: 1rem;
@@ -84,9 +144,4 @@ GalaxyFold-280px, looks good on iPhone4-320px */
     #table-stats {
         font-size: 1rem;
     }
-
-    #button-back-to-top {
-        font-size: 1rem;
-    }
-
 }

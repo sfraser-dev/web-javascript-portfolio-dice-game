@@ -14,6 +14,14 @@ function rollTheDice(paragraphToAppend, diceImage1, diceImage2, headerTitle, sta
     // Update the dice images.
     diceImage1.setAttribute("src", `images/dice${p1Roll}.png`);
     diceImage2.setAttribute("src", `images/dice${p2Roll}.png`);
+    // Add shake animation to the dice.
+    diceImage1.classList.add("dice-roll-animation");
+    diceImage2.classList.add("dice-roll-animation");
+    // Remove class after dice animation so it can be reapplied next roll.
+    setTimeout(() => {
+        diceImage1.classList.remove("dice-roll-animation");
+        diceImage2.classList.remove("dice-roll-animation");
+    }, 400);
     // Print who wins this round in the title (H1 element).
     const theWinner = printOutcomeOfDiceRollsToH1(p1Roll, p2Roll, headerTitle);
     // Append current dice rolls just made to the local storage database too.
@@ -25,9 +33,10 @@ function rollTheDice(paragraphToAppend, diceImage1, diceImage2, headerTitle, sta
     window.localStorage.setItem(theLen,
         JSON.stringify({ "P1": p1Roll, "P2": p2Roll }));
     // Update the local storage database that is printed on the page.
-    const theOutputHtml =
-        `Round ${theLen + 1}, Player1: ${p1Roll}, Player2: ${p2Roll}<br>`;
-    paragraphToAppend.innerHTML += theOutputHtml;
+    const span = document.createElement("span");
+    span.className = "roll-result-line";
+    span.innerHTML = `Round ${theLen + 1}, Player1: ${p1Roll}, Player2: ${p2Roll}<br>`;
+    paragraphToAppend.appendChild(span);
     // Get the current number of P1 wins, P2 wins and draws currently in the stats.
     let p1Wins = statsObj["p1Wins"];
     let p2Wins = statsObj["p2Wins"];
@@ -62,16 +71,22 @@ function getRolledDiceValue() {
 // Return 0 if it was a draw, return 1 if player1 won and return 2 if player2 won.
 function printOutcomeOfDiceRollsToH1(p1, p2, headerTitle) {
     let retVal = -1;
+    let msg = "";
     if (p1 > p2) {
-        headerTitle.innerText = "Player 1 wins";
+        msg = "Player 1 wins";
         retVal = 1;
     } else if (p2 > p1) {
-        headerTitle.innerText = "Player 2 wins";
+        msg = "Player 2 wins";
         retVal = 2;
     } else {
-        headerTitle.innerText = "It's a draw";
+        msg = "Draw!";
         retVal = 0;
     }
+    headerTitle.innerText = msg;
+    // Force restart the animation.
+    headerTitle.classList.remove("header-flash");
+    void headerTitle.offsetWidth; // force reflow
+    headerTitle.classList.add("header-flash");
     return retVal;
 }
 
