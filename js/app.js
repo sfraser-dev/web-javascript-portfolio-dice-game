@@ -63,13 +63,13 @@ function getRolledDiceValue() {
 function printOutcomeOfDiceRollsToH1(p1, p2, headerTitle) {
     let retVal = -1;
     if (p1 > p2) {
-        headerTitle.innerText = "player 1 wins";
+        headerTitle.innerText = "Player 1 wins";
         retVal = 1;
     } else if (p2 > p1) {
-        headerTitle.innerText = "player 2 wins";
+        headerTitle.innerText = "Player 2 wins";
         retVal = 2;
     } else {
-        headerTitle.innerText = "it's a draw";
+        headerTitle.innerText = "It's a draw";
         retVal = 0;
     }
     return retVal;
@@ -103,12 +103,20 @@ function init(paragraphToAppend, diceImage1, diceImage2, headerTitle,
     headerTitleOriginalText, statsObj, tableStats) {
     if (window.localStorage.length > 0) {
         // Local storage acts like an object which doesn't have order, need to order manually.
-        let orderedArrVals = new Array(window.localStorage.length).fill(0);
+        let orderedArrVals = [];
         for (let i = 0; i < window.localStorage.length; i++) {
-            // Get the key/value pairs from local storage. The key is a counter and values are JSON data.
             const key = window.localStorage.key(i);
-            const valueObj = JSON.parse(window.localStorage.getItem(key));
-            orderedArrVals[key] = valueObj;
+            const val = window.localStorage.getItem(key);
+
+            // Ignore keys like "theme", "user", etc.
+            if (!/^\d+$/.test(key)) continue;
+
+            try {
+                const valueObj = JSON.parse(val);
+                orderedArrVals[parseInt(key)] = valueObj;
+            } catch (e) {
+                console.warn(`Skipping invalid JSON at key=${key}`);
+            }
         }
         // Print ordered results database to page and calculate stats.
         let p1WinCount = 0;
@@ -193,9 +201,6 @@ function backToTopFunction() {
     document.documentElement.scrollTop = 0;
 }
 
-// Automatcally show/hide the "back to top" button.
-window.onscroll = function () { backToTopScrollFunction(buttonBackToTop); };
-
 //---------- Main ----------//
 // Grab the HTML elements.
 const paragraphToAppend = document.getElementById("paragraph-to-append");
@@ -234,3 +239,6 @@ buttonReset.addEventListener("click", function () {
 
 // Scroll back to the top button.
 buttonBackToTop.addEventListener("click", backToTopFunction);
+
+// Automatcally show/hide the "back to top" button.
+window.onscroll = function () { backToTopScrollFunction(buttonBackToTop); };

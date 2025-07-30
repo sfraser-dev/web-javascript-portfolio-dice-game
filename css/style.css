@@ -1,7 +1,9 @@
-#paragraph-to-append,
-#paragraph-stats {
-    font-size: 0.7rem;
-    font-family: 'Roboto Mono', monospace;
+#header-title {
+    font-size: 1.25rem;
+}
+
+#p1p2-paragraph {
+    font-size: 0.6rem
 }
 
 #dice-image-1,
@@ -10,8 +12,21 @@
     height: 40px;
 }
 
+#button-roll,
+#button-reset {
+    font-size: 0.6rem;
+    padding: 4px 8px;
+    margin: 2px;
+}
+
+#paragraph-to-append,
+#paragraph-stats {
+    font-size: 0.6rem;
+    font-family: 'Roboto Mono', monospace;
+}
+
 #table-stats {
-    font-size: 0.5rem;
+    font-size: 0.6rem;
 }
 
 .my-body-limit-width-and-center {
@@ -23,6 +38,7 @@
 .my-margin-right-wee{margin-right:4px}
 
 #button-back-to-top {
+    font-size: 0.6rem;
     display: none;
     position: fixed;
     bottom: 20px;
@@ -36,12 +52,11 @@ essentially just bigger phones. */
 /* Device emulator: works fine with JioPhone2-240px and 
 GalaxyFold-280px, looks good on iPhone4-320px */
 @media only screen and (min-width: 401px) {
-    .my-body-limit-width-and-center {
-        max-width: 380px;
+    #header-title {
+        font-size: 2rem;
     }
 
-    #paragraph-to-append,
-    #paragraph-stats {
+    #p1p2-paragraph {
         font-size: 1rem;
     }
 
@@ -51,7 +66,27 @@ GalaxyFold-280px, looks good on iPhone4-320px */
         height: 60px;
     }
 
+    #button-roll,
+    #button-reset {
+        font-size: 1rem;
+        padding: 4px 8px;
+    }
+
+    #paragraph-to-append,
+    #paragraph-stats {
+        font-size: 1rem;
+    }
+
+    .my-body-limit-width-and-center {
+        max-width: 380px;
+    }
+
     #table-stats {
         font-size: 1rem;
     }
+
+    #button-back-to-top {
+        font-size: 1rem;
+    }
+
 }
